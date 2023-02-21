@@ -1,14 +1,17 @@
 package com.test.application.user.registration.entity;
 
+import com.test.application.user.registration.config.validators.PasswordValidation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -22,24 +25,37 @@ public class Usuario {
     @Column(name = "id", nullable = false)
     private String id;
 
-    @NotBlank(message = "El nombre del usuario es requerido")
+    @NotBlank(message = "{usuario.nombre.notblank}")
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Email(message = "Es necesario especificar un nombre de correo válido")
-    @NotBlank(message = "El correo del usuario es requerido")
-    @Column(name = "correo", nullable = false)
+    @Email(message = "{usuario.correo.notvalid}")
+    @NotBlank(message = "{usuario.correo.notblank}")
+    @Column(name = "correo", unique = true, nullable = false)
     private String correo;
 
-    @NotBlank(message = "La contraseña es requerida")
+    @NotBlank(message = "{usuario.password.notblank}")
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull(message = "Es requerido al menos 1 teléfono de contacto")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Telefono> telefonos;
 
     @Column(name = "token")
     private String token;
+
+    @CreationTimestamp
+    @Column(name = "created", updatable = false)
+    private Date created;
+
+    @UpdateTimestamp
+    @Column(name = "modified")
+    private Date modified;
+
+    @Column(name = "last_login", insertable = false)
+    private Date lastLogin;
+
+    @Column(name = "isactive")
+    private boolean isActive;
 
 }

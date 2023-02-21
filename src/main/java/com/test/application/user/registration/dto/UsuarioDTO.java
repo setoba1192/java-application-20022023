@@ -1,14 +1,13 @@
 package com.test.application.user.registration.dto;
 
-import com.test.application.user.registration.entity.Telefono;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import com.test.application.user.registration.config.validators.PasswordValidation;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,7 +22,16 @@ public class UsuarioDTO {
 
     private String correo;
 
+    @PasswordValidation(message = "{usuario.password.patternmatch}")
     private String password;
 
-    private List<Telefono> telefonos;
+    private Date created;
+
+    private Date modified;
+
+    private Date lastLogin;
+
+    private boolean isActive;
+
+    private List<TelefonoDTO> telefonos;
 }

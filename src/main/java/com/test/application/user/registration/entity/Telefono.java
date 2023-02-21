@@ -18,19 +18,19 @@ public class Telefono {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank(message = "El número de contacto es requerido")
-    @Column(name = "numero")
+    @NotBlank(message = "{telefono.number.notblank}")
+    @Column(name = "numero", nullable = false)
     private String number;
 
-    @NotBlank(message = "El código de ciudad es requerido")
-    @Column(name = "codigo_ciudad")
+    @NotBlank(message = "{telefono.codigociudad.notblank}")
+    @Column(name = "codigo_ciudad", nullable = false)
     private String cityCode;
 
-    @NotBlank(message = "El código de país es requerido")
-    @Column(name = "codigo_pais")
+    @NotBlank(message = "{telefono.codigopais.notblank}")
+    @Column(name = "codigo_pais", nullable = false)
     private String countryCode;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_telefono_fk", nullable = false, updatable = false)
+    @JoinColumn(name = "usuario_id", nullable = false, updatable = false)
     private Usuario usuario;
 }
