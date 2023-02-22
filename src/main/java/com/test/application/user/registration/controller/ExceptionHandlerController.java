@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,6 +52,14 @@ public class ExceptionHandlerController {
     public RespuestaGenericaDTO serviceExceptionHandler(ServiceException e) {
         return RespuestaGenericaDTO.builder()
                 .mensaje(e.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler({ AuthenticationException.class })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public RespuestaGenericaDTO handleAuthenticationException(Exception ex) {
+        return RespuestaGenericaDTO.builder()
+                .mensaje(this.messageSource.getMessage("login.error", null, Locale.getDefault()))
                 .build();
     }
 
