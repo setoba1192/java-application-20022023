@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "69afb73a-6c7d-4672-ae3f-2c31f96346e8",
+		"name": "java-application-20022023",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7842019"
+	},
+	"item": [
+		{
+			"name": "registro",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Joan Sebastian\",\r\n    \"correo\": \"setoba1192@gmail.com\",\r\n    \"password\": \"12345**Aa\",\r\n    \"telefonos\": [{\"number\": \"3112392124\", \"cityCode\": \"306\", \"countryCode\" : \"57\"}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8001/api/auth/registrar",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"auth",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar-usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZXRvYmExMjk5QGdtYWlsLmNvbSIsImlhdCI6MTY3NzA0MTg5MSwiZXhwIjoxNjc3MDQzMzMxfQ.45BrHnaejED98T7OGJLiQM6QLXvIRROXHIGAaGiK2pw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZXRvYmExMjk5QGdtYWlsLmNvbSIsImlhdCI6MTY3NzA0MTg5MSwiZXhwIjoxNjc3MDQzMzMxfQ.45BrHnaejED98T7OGJLiQM6QLXvIRROXHIGAaGiK2pw",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8001/api/usuario/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"usuario",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"setoba1192@gmail.com\",\r\n    \"password\": \"12345**Aa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8001/api/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
