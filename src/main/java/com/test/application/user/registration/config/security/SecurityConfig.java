@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -20,23 +21,31 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
 
+    public static final String[] PUBLIC_PATHS = {"/api/auth/**",
+            "/v3/api-docs.yaml",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"};
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
-                .csrf()
-                .disable()
+
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**")
+                .requestMatchers(PUBLIC_PATHS)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
+                .csrf()
+                .disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling();
 
         return httpSecurity.build();
     }
