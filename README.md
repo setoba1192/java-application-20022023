@@ -1,3 +1,4 @@
+
 ## Instalación
 
 Clonar repositorio
@@ -23,3 +24,16 @@ Ejecutar aplicación en modo local (Conectando a base de datos local)
 ```bash
   java -jar target/user-registration-0.0.1-SNAPSHOT.jar --spring.profiles.active=local
 ```
+## Environment Variables - opcional
+
+Si desea parametrizar las siguientes variables de entorno para que sea configurable
+
+`SECRET_KEY` -> llave de JWT
+
+`USUARIO_PASSWORD_REGEXP` -> Regexp para validación de contraseñas
+
+
+## Swagger
+
+http://localhost:8001/swagger-ui.html
+
