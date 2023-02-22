@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UsuarioService {
 
-    UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO, String token);
+    UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO);
 
     UsuarioDTO findById(String id);
 

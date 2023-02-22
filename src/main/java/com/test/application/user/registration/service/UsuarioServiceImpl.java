@@ -4,15 +4,20 @@ import com.test.application.user.registration.dto.TelefonoDTO;
 import com.test.application.user.registration.dto.UsuarioDTO;
 import com.test.application.user.registration.entity.Telefono;
 import com.test.application.user.registration.entity.Usuario;
+import com.test.application.user.registration.entity.security.Role;
 import com.test.application.user.registration.exception.ServiceException;
 import com.test.application.user.registration.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -26,10 +31,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final MessageSource messageSource;
 
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO, String token) {
+    public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) {
 
         Optional<Usuario> usuarioEncontrado = usuarioRepository.findByCorreo(usuarioDTO.getCorreo());
         if (usuarioEncontrado.isPresent())
@@ -44,8 +49,8 @@ public class UsuarioServiceImpl implements UsuarioService {
                         .cityCode(telefonoDTO.getCityCode())
                         .countryCode(telefonoDTO.getCountryCode())
                         .build()).toList());
-        usuario.setToken(token);
         usuario.setActive(true);
+        usuario.setRole(Role.USER);
         usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 
         UsuarioDTO returnDto = modelMapper.map(usuarioRepository.save(usuario), UsuarioDTO.class);
@@ -70,4 +75,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .orElseThrow(() -> new ServiceException(this.messageSource.getMessage("usuario.id.nonexisting", null, Locale.getDefault())
                         .replace("id", id)));
     }
+
+
 }
