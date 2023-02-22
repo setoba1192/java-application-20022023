@@ -9,6 +9,16 @@
 		{
 			"name": "registro",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZXRvYmExMjk5QGdtYWlsLmNvbSIsImlhdCI6MTY3NzA0MTg5MSwiZXhwIjoxNjc3MDQzMzMxfQ.45BrHnaejED98T7OGJLiQM6QLXvIRROXHIGAaGiK2pw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -85,7 +95,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"correo\": \"setoba1299@gmail.com\",\r\n    \"password\": \"12345**Aa\"\r\n}",
+					"raw": "{\r\n    \"correo\": \"setoba1196@gmail.com\",\r\n    \"password\": \"12345**Aa\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
