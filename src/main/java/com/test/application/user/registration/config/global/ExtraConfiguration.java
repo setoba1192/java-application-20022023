@@ -1,6 +1,7 @@
 package com.test.application.user.registration.config.global;
 
 import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -23,5 +24,4 @@ public class ExtraConfiguration {
         bean.setValidationMessageSource(messageSource);
         return bean;
     }
-
 }
