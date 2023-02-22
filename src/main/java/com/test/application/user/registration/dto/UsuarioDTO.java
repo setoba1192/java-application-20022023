@@ -33,5 +33,7 @@ public class UsuarioDTO {
 
     private boolean isActive;
 
+    private String token;
+
     private List<TelefonoDTO> telefonos;
 }
