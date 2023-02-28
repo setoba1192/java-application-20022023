@@ -32,7 +32,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<RespuestaGenericaDTO> authentication(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<RespuestaGenericaDTO> authentication(@Valid @RequestBody AuthenticationRequest authenticationRequest) {
         return ResponseEntity.ok(RespuestaGenericaDTO.builder()
                 .data(authenticationService.login(authenticationRequest))
                 .mensaje("Inicio de sesión exitoso")
